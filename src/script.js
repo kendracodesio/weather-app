@@ -60,15 +60,21 @@ function showApiData(response) {
  
 }
 
+function requestApiDatabyCity(cityName) {
+  let apiKey = "1e443f6da9b633764beaeb76bb472402";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(showApiData);
+}
 function requestApiData(event) {
     event.preventDefault();
     let citySearch = document.querySelector("#city-search"); 
     let cityName = `${citySearch.value}`;
-    let apiKey = "1e443f6da9b633764beaeb76bb472402";
-    let units = "imperial";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(showApiData);
+    requestApiDatabyCity(cityName);
 }
+
+let defaultCity = "Los Angeles"
+requestApiDatabyCity(defaultCity);
 
 function getCoordsForApi(position) {
   let latitude = position.coords.latitude;
