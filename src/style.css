@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
 
 .celsius {
   position: relative;
@@ -92,6 +93,13 @@ div.col {
   left: -5px;
 }
 
+.footer {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'PT Mono', monospace;
+
+}
 
 .forecast-title {
   color: rgba(62, 62, 62, 0.648);
