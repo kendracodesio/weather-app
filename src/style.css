@@ -1,0 +1,168 @@
+
+.celsius {
+  position: relative;
+  left: -40px;
+  top: -5px;
+}
+
+.city {
+
+  margin-top: 10px;
+  font-size: 40px;
+}
+
+.country {
+  font-size: 22px;
+  line-height: .9;
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+.current-conditions {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.current-temp, .main-degree-symbol {
+  font-size: 80px;
+  line-height: 105%;
+  font-weight: 300;
+}
+
+.current-location-button {
+  display: inline;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  background: #e5ebf0;
+  position: absolute;
+  height: 40px;
+  width: 35px;
+
+}
+
+.current-location-button:hover {
+ border: 3px solid #ced4da;
+ background: #d7dde3;
+ transition: all 200ms ease-in-out;
+}
+
+.date {
+  font-size: 17px;
+  font-weight: 400;
+  
+}
+
+.day {
+  font-size: 14px;
+  text-align: center;
+  color: rgba(62, 62, 62, 0.648);
+}
+
+.day-divider {
+  width: 75%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+div.col {
+  padding: 5px;
+}
+
+.details {
+  font-size: 15px;
+  padding-left: 50px;
+  margin: 0 auto;
+  list-style-type: none;
+  line-height: 160%;
+}
+
+.details-1 {
+  margin-top: 75px;
+}
+
+.conditions {
+  font-size: 30px;
+  margin-top: 25px;
+}
+
+.fahrenheit {
+  position: relative;
+  top: -40px;
+  left: -5px;
+}
+
+
+.forecast-title {
+  color: rgba(62, 62, 62, 0.648);
+  font-size: 18px;
+}
+
+.hi-low {
+  text-indent: 5px;
+}
+
+.hi-temp,
+.low-temp {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 100;
+  color: rgba(62, 62, 62, 0.648);
+  padding: 0;
+}
+
+.hi-temp-main {
+  font-weight: 700;
+}
+
+.hi-temp {
+  font-weight: 300;
+}
+
+
+
+.main-card {
+  max-width: 600px;
+  display: block;
+  margin: 20px auto;
+}
+
+
+.search {
+height: 40px;
+position: relative;
+left: 40px;
+}
+
+.search-btn {
+  height: 40px;
+  position: relative;
+  left: 30px;
+}
+
+.search input {
+  height: 40px;
+  
+}
+
+.search input:focus {
+  box-shadow: none;
+  border: 2px solid blue;
+}
+
+.small-card .emoji {
+  margin: 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.unit {
+  display: inline;
+  font-size: 20px;
+  padding: 0 6px 0 6px;
+  border: none;
+  width: 30px;
+  background: transparent;
+}
+
+
