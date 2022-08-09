@@ -1,12 +1,15 @@
+let defaultCity = "Los Angeles";
+requestApiDatabyCity(defaultCity);
+
 function convertTimeAmPm(hours, minutes) {
-    let amOrPm = "";
+  let amOrPm = "";
   if (hours >= 12) {
     amOrPm = "PM";
   } else {
     amOrPm = "AM";
-  };
+  }
   hours = ((hours + 11) % 12) + 1;
-  if(minutes < 10) {
+  if (minutes < 10) {
     minutes = `0${minutes}`;
   }
   return `${hours}:${minutes} ${amOrPm}`;
@@ -23,20 +26,28 @@ function formatDate(newDate) {
     "Saturday",
   ];
   let day = days[newDate.getDay()];
-  
+
   let hr = newDate.getHours();
   let min = newDate.getMinutes();
   let time = convertTimeAmPm(hr, min);
   return `${day} ${time}`;
 }
 
-let currentDate = document.querySelector("#current-date");
-
-currentDate.innerHTML = formatDate(new Date());
+function getTime(timezone) {
+  let date = new Date();
+  let usersLocalTime = date.getTime();
+  let currentOffset = date.getTimezoneOffset() * 60000;
+  let utc = usersLocalTime + currentOffset;
+  let citysLocalTime = new Date(utc + (3600000 * timezone));
+  return formatDate(citysLocalTime);
+}
 
 function showApiData(response) {
   console.log(response);
   let city = response.data.name;
+  let timezone = response.data.timezone;
+  let currentDate = document.querySelector("#current-date");
+  currentDate.innerHTML = getTime(timezone / 3600);
   let country = response.data.sys.country;
   let currentTemp = Math.round(response.data.main.temp);
   let feelsLikeTemp = Math.round(response.data.main.feels_like);
@@ -50,6 +61,7 @@ function showApiData(response) {
   let humidityDisplay = document.querySelector("#humidity");
   let windSpeedDisplay = document.querySelector("#windSpeed");
   let currentConditionsDisplay = document.querySelector("#current-conditions");
+
   cityDisplay.innerHTML = city;
   countryDisplay.innerHTML = country;
   currentTempDisplay.innerHTML = currentTemp;
@@ -57,7 +69,6 @@ function showApiData(response) {
   humidityDisplay.innerHTML = humidity;
   windSpeedDisplay.innerHTML = windSpeed;
   currentConditionsDisplay.innerHTML = currentConditions;
- 
 }
 
 function requestApiDatabyCity(cityName) {
@@ -67,14 +78,11 @@ function requestApiDatabyCity(cityName) {
   axios.get(apiUrl).then(showApiData);
 }
 function requestApiData(event) {
-    event.preventDefault();
-    let citySearch = document.querySelector("#city-search"); 
-    let cityName = `${citySearch.value}`;
-    requestApiDatabyCity(cityName);
+  event.preventDefault();
+  let citySearch = document.querySelector("#city-search");
+  let cityName = `${citySearch.value}`;
+  requestApiDatabyCity(cityName);
 }
-
-let defaultCity = "Los Angeles"
-requestApiDatabyCity(defaultCity);
 
 function getCoordsForApi(position) {
   let latitude = position.coords.latitude;
@@ -92,7 +100,6 @@ function getLocation() {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", requestApiData);
 
-
 let currentLocationButton = document.querySelector("#get-location-button");
 currentLocationButton.addEventListener("click", getLocation);
 
@@ -102,29 +109,28 @@ function celsiusToFahrenheit(celsiusTemp) {
 }
 
 function fahrenheitToCelsius(fahrenheitTemp) {
-    let celsiusTemp = (fahrenheitTemp - 32) / (9 / 5);
-    return celsiusTemp;
+  let celsiusTemp = (fahrenheitTemp - 32) / (9 / 5);
+  return celsiusTemp;
 }
 
-function displayF(){
-    if (buttonC.innerHTML === `<strong>C</strong>`) {
-        let todaysTemp = document.querySelector("#todays-temp");
-        let todaysFahrenheitTemp = celsiusToFahrenheit(todaysTemp.innerHTML);
-        todaysTemp.innerHTML = Math.round(todaysFahrenheitTemp);
-        buttonF.innerHTML = `<strong>F</strong>`;
-        buttonC.innerHTML = "C";  
-
-    } 
+function displayF() {
+  if (buttonC.innerHTML === `<strong>C</strong>`) {
+    let todaysTemp = document.querySelector("#todays-temp");
+    let todaysFahrenheitTemp = celsiusToFahrenheit(todaysTemp.innerHTML);
+    todaysTemp.innerHTML = Math.round(todaysFahrenheitTemp);
+    buttonF.innerHTML = `<strong>F</strong>`;
+    buttonC.innerHTML = "C";
+  }
 }
 
-function displayC(){
-    if (buttonF.innerHTML === `<strong>F</strong>`) {
-        let todaysTemp = document.querySelector("#todays-temp");
-        let todaysCelsiusTemp = fahrenheitToCelsius(todaysTemp.innerHTML);
-        todaysTemp.innerHTML = Math.round(todaysCelsiusTemp);
-        buttonC.innerHTML = `<strong>C</strong>`;
-        buttonF.innerHTML = "F";   
-    }
+function displayC() {
+  if (buttonF.innerHTML === `<strong>F</strong>`) {
+    let todaysTemp = document.querySelector("#todays-temp");
+    let todaysCelsiusTemp = fahrenheitToCelsius(todaysTemp.innerHTML);
+    todaysTemp.innerHTML = Math.round(todaysCelsiusTemp);
+    buttonC.innerHTML = `<strong>C</strong>`;
+    buttonF.innerHTML = "F";
+  }
 }
 
 let buttonF = document.querySelector("#unit-f");
