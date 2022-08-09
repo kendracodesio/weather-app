@@ -44,16 +44,10 @@ function getTime(timezone) {
 
 function showApiData(response) {
   console.log(response);
-  let city = response.data.name;
   let timezone = response.data.timezone;
-  let currentDate = document.querySelector("#current-date");
-  currentDate.innerHTML = getTime(timezone / 3600);
-  let country = response.data.sys.country;
-  let currentTemp = Math.round(response.data.main.temp);
-  let feelsLikeTemp = Math.round(response.data.main.feels_like);
-  let humidity = response.data.main.humidity;
-  let windSpeed = Math.round(response.data.wind.speed);
-  let currentConditions = response.data.weather[0].description;
+  let LocalDateTime = document.querySelector("#local-date-time");
+  LocalDateTime.innerHTML = getTime(timezone / 3600);
+
   let cityDisplay = document.querySelector("#city-display");
   let countryDisplay = document.querySelector("#country-display");
   let currentTempDisplay = document.querySelector("#todays-temp");
@@ -62,13 +56,13 @@ function showApiData(response) {
   let windSpeedDisplay = document.querySelector("#windSpeed");
   let currentConditionsDisplay = document.querySelector("#current-conditions");
 
-  cityDisplay.innerHTML = city;
-  countryDisplay.innerHTML = country;
-  currentTempDisplay.innerHTML = currentTemp;
-  feelsLikeDisplay.innerHTML = feelsLikeTemp;
-  humidityDisplay.innerHTML = humidity;
-  windSpeedDisplay.innerHTML = windSpeed;
-  currentConditionsDisplay.innerHTML = currentConditions;
+  cityDisplay.innerHTML = response.data.name;
+  countryDisplay.innerHTML = response.data.sys.country;
+  currentTempDisplay.innerHTML = Math.round(response.data.main.temp);
+  feelsLikeDisplay.innerHTML = Math.round(response.data.main.feels_like);
+  humidityDisplay.innerHTML = response.data.main.humidity;
+  windSpeedDisplay.innerHTML = Math.round(response.data.wind.speed);
+  currentConditionsDisplay.innerHTML = response.data.weather[0].description;
 }
 
 function requestApiDatabyCity(cityName) {
