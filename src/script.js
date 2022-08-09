@@ -55,6 +55,7 @@ function showApiData(response) {
   let humidityDisplay = document.querySelector("#humidity");
   let windSpeedDisplay = document.querySelector("#windSpeed");
   let currentConditionsDisplay = document.querySelector("#current-conditions");
+  let mainWeatherIcon = document.querySelector("#main-weather-icon");
 
   cityDisplay.innerHTML = response.data.name;
   countryDisplay.innerHTML = response.data.sys.country;
@@ -63,6 +64,11 @@ function showApiData(response) {
   humidityDisplay.innerHTML = response.data.main.humidity;
   windSpeedDisplay.innerHTML = Math.round(response.data.wind.speed);
   currentConditionsDisplay.innerHTML = response.data.weather[0].description;
+  mainWeatherIcon.setAttribute(
+    "src",
+    ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  mainWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function requestApiDatabyCity(cityName) {

@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
 
-.celsius {
-  position: relative;
-  left: -40px;
-  top: -5px;
+button .celsius {
+display: inline;
+  
 }
 
 .city {
-
   margin-top: 10px;
   font-size: 40px;
 }
@@ -19,13 +17,22 @@
   padding-bottom: 10px;
 }
 
-.current-conditions {
-  font-size: 20px;
-  text-transform: capitalize;
+.conditions {
+  font-size: 30px;
+  margin-top: 25px;
+ 
 }
 
-.current-temp, .main-degree-symbol {
-  font-size: 80px;
+.current-conditions {
+  font-size: 18px;
+  text-transform: capitalize;
+  padding-left: 40px;
+
+}
+
+
+.current-temp {
+  font-size: 70px;
   line-height: 105%;
   font-weight: 300;
 }
@@ -82,15 +89,10 @@ div.col {
   margin-top: 75px;
 }
 
-.conditions {
-  font-size: 30px;
-  margin-top: 25px;
-}
+button .fahrenheit {
+  display: inline;
+  
 
-.fahrenheit {
-  position: relative;
-  top: -40px;
-  left: -5px;
 }
 
 .footer {
@@ -106,8 +108,10 @@ div.col {
   font-size: 18px;
 }
 
-.hi-low {
-  text-indent: 5px;
+
+
+.hi-low-main {
+ text-indent: 5px;
 }
 
 .hi-temp,
@@ -121,6 +125,7 @@ div.col {
 
 .hi-temp-main {
   font-weight: 700;
+ 
 }
 
 .hi-temp {
@@ -133,6 +138,21 @@ div.col {
   max-width: 600px;
   display: block;
   margin: 20px auto;
+}
+
+.main-icon {
+  height: 60px;
+  position: absolute;
+left: -5px;
+top: 210px;
+ 
+}
+
+.main-degree-symbol {
+  font-size: 70px;
+  line-height: 105%;
+  font-weight: 300;
+  
 }
 
 
@@ -164,13 +184,27 @@ left: 40px;
   font-size: 20px;
 }
 
-.unit {
-  display: inline;
-  font-size: 20px;
-  padding: 0 6px 0 6px;
-  border: none;
-  width: 30px;
+.unit-fahrenheit {
+  
+  position: relative;
+  top: -25px;
+  font-size: 18px;
+  padding: 0;
+ border: none;
+  width: 20px;
   background: transparent;
 }
+
+.unit-celsius {
+  position: relative;
+  left: -25px;
+  font-size: 18px;
+  padding: 0;
+ border: none;
+  width: 20px;
+  background: transparent;
+
+}
+
 
 
