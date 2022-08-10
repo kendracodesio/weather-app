@@ -77,11 +77,27 @@ function requestApiDatabyCity(cityName) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showApiData);
 }
+
+//works for 2 letter US state or spelled out country
+function requestApiDataByCityStateCountry(cityName, stateAbbrOrCountry) {
+  let apiKey = "1e443f6da9b633764beaeb76bb472402";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${stateAbbrOrCountry},US&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(showApiData);
+}
+
+
 function requestApiData(event) {
   event.preventDefault();
   let citySearch = document.querySelector("#city-search");
   let cityName = `${citySearch.value}`;
-  requestApiDatabyCity(cityName);
+  if (cityName.includes(",")) {
+    let cityArray = cityName.split(",");
+    requestApiDataByCityStateCountry(cityArray[0], cityArray[1]);
+  } else {
+     requestApiDatabyCity(cityName);
+  }
+ 
 }
 
 function getCoordsForApi(position) {
