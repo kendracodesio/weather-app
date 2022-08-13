@@ -41,26 +41,26 @@
         <h6 class="card-subtitle mb-2 text-muted date" id="local-date-time"></h6>
         <div class="row">
           <div class="col">
-            
+
             <div class="conditions"> <img src="" alt="" id="main-weather-icon" class="main-icon" />
               <span class="card-subtitle mb-2 text-muted current-conditions" id="current-conditions">
               </span>
             </div>
             <div>
-              <div class="hi-low-main text-muted"><span class="hi-temp-main">H:<span id="hi-temp">
-                    90</span>°</span>&ensp;|&ensp;<span class="lo-temp-main">L: <span id="lo-temp">60</span>°</span>
+              <div class="hi-low-main text-muted"><span class="hi-temp-main" id="hi-temp">
+                  ↑90</span>°&ensp;<span class="lo-temp-main" id="lo-temp">↓60</span>°
               </div>
               <span class="current-temp" id="todays-temp"></span><span class="main-degree-symbol">°</span>
 
               <button class="unit-fahrenheit" id="unit-f"><strong>F</strong></button>
-              
+
               <button class="unit-celsius" id="unit-c">C</button>
-              
-             
+
+
             </div>
           </div>
           <div class="col">
-           
+
 
             <ul class="details">
               <li class="feels-like-element text-muted details-1">Feels like <span id="feels-like"></span>°
@@ -70,113 +70,103 @@
             </ul>
           </div>
         </div>
-
         <hr />
-
-        <p class="card-text forecast-title"><em>
+        <h4 class="forecast-title-main"><em>
             Looking Ahead....
-          </em></p>
-        <div class="row">
-          <div class="col">
-            <div class="card small-card">
-              <div class="card-body">
-                <h5 class="card-title day">
-                  Sun <div class="emoji">☀️</div>
-                </h5>
-                <div class="day-divider">
-                  <hr />
+          </em>
+          <h4>
+            <div class="weather-forecast-day text-muted">
+              <div class="row">
+                <div class="col">
+                  <div class="vl">
+                  <h5 class="forecast-title-day">
+                    Sun
+                  </h5>
+                  <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                  <div class="forecast-temps-day">
+                    <div class="hi-temp-day">
+                      90°
+                    </div>
+                    <div class="low-temp-day">
+                      65°
+                    </div>
+                  </div>
+                  </div>
                 </div>
-                <div class="hi-temp">
-                  H: 90°
+                <div class="col">
+                  <div class="vl">
+                    <h5 class="forecast-title-day">
+                      Sun
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        90°
+                      </div>
+                      <div class="low-temp-day">
+                        65°
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="low-temp">
-                  L: 65°
+                <div class="col">
+                  <div class="vl">
+                    <h5 class="forecast-title-day">
+                      Sun
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        90°
+                      </div>
+                      <div class="low-temp-day">
+                        65°
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card small-card">
-              <div class="card-body">
-                <h5 class="card-title day">
-                  Mon <div class="emoji">🌥</div>
-                </h5>
-                <div class="day-divider">
-                  <hr />
+                <div class="col">
+                  <div class="vl">
+                    <h5 class="forecast-title-day">
+                      Sun
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        90°
+                      </div>
+                      <div class="low-temp-day">
+                        65°
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="hi-temp">
-                  H: 82°
-                </div>
-                <div class="low-temp">
-                  L: 59°
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card small-card">
-              <div class="card-body">
-                <h5 class="card-title day">
-                  Tue <div class="emoji">🌧</div>
-                </h5>
-                <div class="day-divider">
-                  <hr />
-                </div>
-                <div class="hi-temp">
-                  H: 75°
-                </div>
-                <div class="low-temp">
-                  L: 55°
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card small-card">
-              <div class="card-body">
-                <h5 class="card-title day">
-                  Wed <div class="emoji">🌧</div>
-                </h5>
-                <div class="day-divider">
-                  <hr />
-                </div>
-                <div class="hi-temp">
-                  H: 77°
-                </div>
-                <div class="low-temp">
-                  L: 59°
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card small-card">
-              <div class="card-body">
-                <h5 class="card-title day">
-                  Thu <div class="emoji">🌤</div>
-                </h5>
-                <div class="day-divider">
-                  <hr />
-                </div>
-                <div class="hi-temp">
-                  H: 84°
-                </div>
-                <div class="low-temp">
-                  L: 62°
+                <div class="col">
+                    <h5 class="forecast-title-day">
+                      Sun
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        90°
+                      </div>
+                      <div class="low-temp-day">
+                        65°
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </div>
+
+    <div class="footer">
+      An
+      <a href="https://github.com/kendracodesio/weather-app.git">open source project</a>
+      by Kendra Reynolds
+    </div>
   </div>
-  <div class="footer">
-    An
-    <a href="https://github.com/kendracodesio/weather-app.git">open source project</a>
-    by Kendra Reynolds
-  </div>
-</div>
 
   <script src="src/script.js"></script>
 </body>

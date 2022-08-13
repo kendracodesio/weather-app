@@ -61,11 +61,7 @@ display: inline;
   
 }
 
-.day {
-  font-size: 14px;
-  text-align: center;
-  color: rgba(62, 62, 62, 0.648);
-}
+
 
 .day-divider {
   width: 75%;
@@ -112,24 +108,28 @@ button .fahrenheit {
 
 .hi-low-main {
  text-indent: 5px;
+ font-size: 18px;
+ font-weight: 300;
 }
 
-.hi-temp,
-.low-temp {
+
+.hi-temp-day,
+.low-temp-day {
   text-align: center;
-  font-size: 16px;
-  font-weight: 100;
+  font-size: 15px;
+  font-weight: 300;
   color: rgba(62, 62, 62, 0.648);
   padding: 0;
 }
 
 .hi-temp-main {
-  font-weight: 700;
+  font-weight: 700 !important;
  
 }
 
-.hi-temp {
-  font-weight: 300;
+.hi-temp-day {
+  font-weight: 700 !important;
+  margin-bottom: 5px;
 }
 
 
@@ -206,5 +206,31 @@ left: 40px;
 
 }
 
+.weather-forecast-day {
+  text-align: center;
+}
+
+.forecast-title-main {
+  font-size: 20px;
+  color: rgba(62, 62, 62, 0.8);
+  margin-bottom: 20px;
+}
+
+.forecast-title-day {
+  font-size: 15px;
+  color: rgba(62, 62, 62, 0.648);
+  margin-bottom: 0;
+}
+
+.forecast-day-icon {
+  max-width: 50px;
+  margin-bottom: 10px;
+ 
+}
+
+.vl {
+  border-right: 1px solid #dee2de;
+
+}
 
 
