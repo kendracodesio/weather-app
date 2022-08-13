@@ -1,4 +1,3 @@
-
 function convertTimeAmPm(hours, minutes) {
   let amOrPm = "";
   if (hours >= 12) {
@@ -15,13 +14,13 @@ function convertTimeAmPm(hours, minutes) {
 
 function formatDate(newDate) {
   let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
   ];
   let day = days[newDate.getDay()];
 
@@ -36,36 +35,22 @@ function getTime(timezone) {
   let usersLocalTime = date.getTime();
   let currentOffset = date.getTimezoneOffset() * 60000;
   let utc = usersLocalTime + currentOffset;
-  let citysLocalTime = new Date(utc + (3600000 * timezone));
+  let citysLocalTime = new Date(utc + 3600000 * timezone);
   return formatDate(citysLocalTime);
 }
 
-function showApiData(response) {
-  console.log(response);
-  let timezone = response.data.timezone;
-  let LocalDateTimeElement = document.querySelector("#local-date-time");
-  LocalDateTimeElement.innerHTML = getTime(timezone / 3600);
-  let cityElement = document.querySelector("#city-display");
-  let countryElement = document.querySelector("#country-display");
-  let currentTempElement = document.querySelector("#todays-temp");
-  let feelsLikeElement = document.querySelector("#feels-like");
-  let humidityElement = document.querySelector("#humidity");
-  let windSpeedElement = document.querySelector("#windSpeed");
-  let currentConditionsElement = document.querySelector("#current-conditions");
-  let mainWeatherIcon = document.querySelector("#main-weather-icon");
-  cityElement.innerHTML = response.data.name;
-  countryElement.innerHTML = response.data.sys.country;
-  currentTempElement.innerHTML = Math.round(response.data.main.temp);
-  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
-  humidityElement.innerHTML = response.data.main.humidity;
-  windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
-  currentConditionsElement.innerHTML = response.data.weather[0].description;
-  mainWeatherIcon.setAttribute(
-    "src",
-    ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  mainWeatherIcon.setAttribute("alt", response.data.weather[0].description);
-  displayForecast();
+function getDay(timestamp) {
+let date = new Date(timestamp * 1000);
+  let days = [
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ];
+return days[date.getDay()];
 }
 
 function getApiDataByCity(cityName) {
@@ -74,6 +59,9 @@ function getApiDataByCity(cityName) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showApiData);
 }
+
+let defaultCity = "Los Angeles";
+getApiDataByCity(defaultCity);
 
 //works for 2 letter US state or spelled out country
 function getApiDataByCityStateCountry(cityName, stateAbbrOrCountry) {
@@ -91,11 +79,11 @@ function requestApiData(event) {
     let cityArray = cityName.split(",");
     getApiDataByCityStateCountry(cityArray[0], cityArray[1]);
   } else {
-     getApiDataByCity(cityName);
+    getApiDataByCity(cityName);
   }
 }
 
-function getCoordsForApi(position) {
+function getCurrentLocationCoordsForApi(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
@@ -105,9 +93,97 @@ function getCoordsForApi(position) {
 }
 
 function getLocation() {
-  navigator.geolocation.getCurrentPosition(getCoordsForApi);
+  navigator.geolocation.getCurrentPosition(getCurrentLocationCoordsForApi);
 }
 
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
+ 
+  let todaysHighElement = document.querySelector("#hi-temp-today");
+  let todayLowElement = document.querySelector("#lo-temp-today");
+  let forecastElement = document.querySelector("#five-day-forecast");
+  let forecastHTML = `<div class="row">`;
+  let count = 0;
+  let startIndex = 0;
+  let found = false;
+
+  forecast.forEach(function(forecastDay, index) {
+    if (index === 0 || index === 1) {
+      let localDateTimeElement = document.querySelector("#local-date-time");
+      if(localDateTimeElement.innerHTML.includes(getDay(forecastDay.dt))) {
+        startIndex = index + 1;
+        found = true;
+        todaysHighElement.innerHTML = Math.round(forecastDay.temp.max);
+        todayLowElement.innerHTML = Math.round(forecastDay.temp.min);
+      }
+    }
+    if (found) {
+    if ((index >= startIndex) && (index < (5 + startIndex))) {
+     
+    forecastHTML += `<div class="col">
+                    <h5 class="forecast-title-day">
+                      ${getDay(forecastDay.dt)}
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon}@2x.png" alt="${forecastDay.weather[0].description}" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        ${Math.round(forecastDay.temp.max)}°
+                      </div>
+                      <div class="low-temp-day">
+                        ${Math.round(forecastDay.temp.min)}°
+                      </div>
+                    </div>
+                </div>`;
+       }
+    }
+  });
+
+
+  forecastHTML += `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+
+
+function showApiData(response) {
+  console.log(response);
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let apiKey = "1e443f6da9b633764beaeb76bb472402";
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayForecast);
+  let timezone = response.data.timezone;
+  let LocalDateTimeElement = document.querySelector("#local-date-time");
+  LocalDateTimeElement.innerHTML = getTime(timezone / 3600);
+  let cityElement = document.querySelector("#city-display");
+  let countryElement = document.querySelector("#country-display");
+  let currentTempElement = document.querySelector("#todays-temp");
+  let hiTempTodayElement = document.querySelector("#hi-temp-today");
+  let loTempTodayElement = document.querySelector("#lo-temp-today");
+  let feelsLikeElement = document.querySelector("#feels-like");
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeedElement = document.querySelector("#windSpeed");
+  let currentConditionsElement = document.querySelector("#current-conditions");
+  let mainWeatherIcon = document.querySelector("#main-weather-icon");
+  cityElement.innerHTML = response.data.name;
+  countryElement.innerHTML = response.data.sys.country;
+  currentTempElement.innerHTML = Math.round(response.data.main.temp);
+  hiTempTodayElement.innerHTML = Math.round(response.data.main.temp_max);
+  loTempTodayElement.innerHTML = Math.round(response.data.main.temp_min);
+  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
+  humidityElement.innerHTML = response.data.main.humidity;
+  windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
+  currentConditionsElement.innerHTML = response.data.weather[0].description;
+  mainWeatherIcon.setAttribute(
+    "src",
+    ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  mainWeatherIcon.setAttribute("alt", response.data.weather[0].description);
+}
 
 function celsiusToFahrenheit(celsiusTemp) {
   let fahrenheitTemp = celsiusTemp * (9 / 5) + 32;
@@ -139,37 +215,6 @@ function displayC() {
   }
 }
 
-
-function displayForecast() {
-let forecastElement = document.querySelector("#five-day-forecast");
-let forecastDays = ["Sun", "Mon", "Tue", "Wed", "Thu"];
-let forecastHTML = `<div class="row">`;
-forecastDays.forEach(function(day) {
-  forecastHTML = forecastHTML + 
-              `<div class="col">
-                    <h5 class="forecast-title-day">
-                      ${day}
-                    </h5>
-                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
-                    <div class="forecast-temps-day">
-                      <div class="hi-temp-day">
-                        90°
-                      </div>
-                      <div class="low-temp-day">
-                        65°
-                      </div>
-                    </div>
-                </div>`;
-});
-forecastHTML = forecastHTML + `</div>`;
-forecastElement.innerHTML = forecastHTML;
-}
-
-
-let defaultCity = "Los Angeles";
-getApiDataByCity(defaultCity);
-
-
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", requestApiData);
 
@@ -181,4 +226,3 @@ let buttonC = document.querySelector("#unit-c");
 
 buttonF.addEventListener("click", displayF);
 buttonC.addEventListener("click", displayC);
-
