@@ -82,6 +82,7 @@ function requestApiData(event) {
   } else {
     getApiDataByCity(cityName);
   }
+   citySearchElement.value = "";
 }
 
 function getCurrentLocationCoordsForApi(position) {
@@ -97,7 +98,7 @@ function getLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationCoordsForApi);
 }
 
-function resetButtons() {
+function resetPageSettings() {
    let buttonF = document.querySelector("#unit-f");
    buttonF.innerHTML = `<strong>F</strong>`;
    let buttonC = document.querySelector("#unit-c");
@@ -108,7 +109,7 @@ function resetButtons() {
 }
 
 function displayForecast(response) {
-resetButtons();
+resetPageSettings();
   let forecast = response.data.daily;
   let todaysHighElement = document.querySelector("#hi-temp-today");
   let todayLowElement = document.querySelector("#lo-temp-today");
