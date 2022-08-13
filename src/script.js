@@ -57,6 +57,7 @@ function getApiDataByCity(cityName) {
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(showApiData);
 }
 
@@ -97,15 +98,11 @@ function getLocation() {
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecast = response.data.daily;
-
- 
   let todaysHighElement = document.querySelector("#hi-temp-today");
   let todayLowElement = document.querySelector("#lo-temp-today");
   let forecastElement = document.querySelector("#five-day-forecast");
   let forecastHTML = `<div class="row">`;
-  let count = 0;
   let startIndex = 0;
   let found = false;
 
@@ -129,11 +126,11 @@ function displayForecast(response) {
                     <img src="http://openweathermap.org/img/wn/${
                       forecastDay.weather[0].icon}@2x.png" alt="${forecastDay.weather[0].description}" class="forecast-day-icon" />
                     <div class="forecast-temps-day">
-                      <div class="hi-temp-day">
-                        ${Math.round(forecastDay.temp.max)}°
+                      <div class="hi-temp-day"><span class="convert">
+                        ${Math.round(forecastDay.temp.max)}</span>°
                       </div>
-                      <div class="low-temp-day">
-                        ${Math.round(forecastDay.temp.min)}°
+                      <div class="low-temp-day"><span class="convert">
+                        ${Math.round(forecastDay.temp.min)}</span>°
                       </div>
                     </div>
                 </div>`;
@@ -149,7 +146,7 @@ function displayForecast(response) {
 
 
 function showApiData(response) {
-  console.log(response);
+ console.log(response.data);
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
@@ -162,21 +159,17 @@ function showApiData(response) {
   let cityElement = document.querySelector("#city-display");
   let countryElement = document.querySelector("#country-display");
   let currentTempElement = document.querySelector("#todays-temp");
-  let hiTempTodayElement = document.querySelector("#hi-temp-today");
-  let loTempTodayElement = document.querySelector("#lo-temp-today");
   let feelsLikeElement = document.querySelector("#feels-like");
   let humidityElement = document.querySelector("#humidity");
-  let windSpeedElement = document.querySelector("#windSpeed");
+  let windSpeedElement = document.querySelector("#wind-speed");
   let currentConditionsElement = document.querySelector("#current-conditions");
   let mainWeatherIcon = document.querySelector("#main-weather-icon");
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
   currentTempElement.innerHTML = Math.round(response.data.main.temp);
-  hiTempTodayElement.innerHTML = Math.round(response.data.main.temp_max);
-  loTempTodayElement.innerHTML = Math.round(response.data.main.temp_min);
   feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
   humidityElement.innerHTML = response.data.main.humidity;
-  windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
+  windSpeedElement.innerHTML = response.data.wind.speed.toFixed(2);
   currentConditionsElement.innerHTML = response.data.weather[0].description;
   mainWeatherIcon.setAttribute(
     "src",
@@ -195,21 +188,45 @@ function fahrenheitToCelsius(fahrenheitTemp) {
   return celsiusTemp;
 }
 
-function displayF() {
+function milesPerHrToMetersPerSec(mph) {
+  let metersPerSec = mph * 0.44704;
+  return metersPerSec;
+}
+
+function metersPerSecToMilesPerHr(metersPerSec) {
+  let mph = metersPerSec * 2.23694;
+  return mph;
+}
+
+function displayImperialUnits() {
   if (buttonC.innerHTML === `<strong>C</strong>`) {
-    let todaysTemp = document.querySelector("#todays-temp");
-    let todaysFahrenheitTemp = celsiusToFahrenheit(todaysTemp.innerHTML);
-    todaysTemp.innerHTML = Math.round(todaysFahrenheitTemp);
+    let convertElements = document.querySelectorAll(".convert");
+    convertElements.forEach(function (temp) {
+      temp.innerHTML = Math.round(celsiusToFahrenheit(temp.innerHTML));
+    });
+    let windSpeedElement = document.querySelector("#wind-speed");
+    windSpeedElement.innerHTML =
+      metersPerSecToMilesPerHr(windSpeedElement.innerHTML)
+    .toFixed(2);
+    let windLabelElement = document.querySelector("#wind-label");
+    windLabelElement.innerHTML = " mph";
+ 
     buttonF.innerHTML = `<strong>F</strong>`;
     buttonC.innerHTML = "C";
   }
 }
 
-function displayC() {
+function displayMetricUnits() {
   if (buttonF.innerHTML === `<strong>F</strong>`) {
-    let todaysTemp = document.querySelector("#todays-temp");
-    let todaysCelsiusTemp = fahrenheitToCelsius(todaysTemp.innerHTML);
-    todaysTemp.innerHTML = Math.round(todaysCelsiusTemp);
+    let convertElements = document.querySelectorAll(".convert");
+    convertElements.forEach(function (temp) {
+      temp.innerHTML = Math.round(fahrenheitToCelsius(temp.innerHTML));
+    });
+    let windSpeedElement = document.querySelector("#wind-speed");
+    windSpeedElement.innerHTML = 
+      milesPerHrToMetersPerSec(windSpeedElement.innerHTML).toFixed(2);
+    let windLabelElement = document.querySelector("#wind-label");
+    windLabelElement.innerHTML = " m/s";
     buttonC.innerHTML = `<strong>C</strong>`;
     buttonF.innerHTML = "F";
   }
@@ -224,5 +241,5 @@ currentLocationButton.addEventListener("click", getLocation);
 let buttonF = document.querySelector("#unit-f");
 let buttonC = document.querySelector("#unit-c");
 
-buttonF.addEventListener("click", displayF);
-buttonC.addEventListener("click", displayC);
+buttonF.addEventListener("click", displayImperialUnits);
+buttonC.addEventListener("click", displayMetricUnits);
