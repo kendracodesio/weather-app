@@ -1,5 +1,3 @@
-let defaultCity = "Los Angeles";
-requestApiDatabyCity(defaultCity);
 
 function convertTimeAmPm(hours, minutes) {
   let amOrPm = "";
@@ -45,33 +43,32 @@ function getTime(timezone) {
 function showApiData(response) {
   console.log(response);
   let timezone = response.data.timezone;
-  let LocalDateTime = document.querySelector("#local-date-time");
-  LocalDateTime.innerHTML = getTime(timezone / 3600);
-
-  let cityDisplay = document.querySelector("#city-display");
-  let countryDisplay = document.querySelector("#country-display");
-  let currentTempDisplay = document.querySelector("#todays-temp");
-  let feelsLikeDisplay = document.querySelector("#feels-like");
-  let humidityDisplay = document.querySelector("#humidity");
-  let windSpeedDisplay = document.querySelector("#windSpeed");
-  let currentConditionsDisplay = document.querySelector("#current-conditions");
+  let LocalDateTimeElement = document.querySelector("#local-date-time");
+  LocalDateTimeElement.innerHTML = getTime(timezone / 3600);
+  let cityElement = document.querySelector("#city-display");
+  let countryElement = document.querySelector("#country-display");
+  let currentTempElement = document.querySelector("#todays-temp");
+  let feelsLikeElement = document.querySelector("#feels-like");
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeedElement = document.querySelector("#windSpeed");
+  let currentConditionsElement = document.querySelector("#current-conditions");
   let mainWeatherIcon = document.querySelector("#main-weather-icon");
-
-  cityDisplay.innerHTML = response.data.name;
-  countryDisplay.innerHTML = response.data.sys.country;
-  currentTempDisplay.innerHTML = Math.round(response.data.main.temp);
-  feelsLikeDisplay.innerHTML = Math.round(response.data.main.feels_like);
-  humidityDisplay.innerHTML = response.data.main.humidity;
-  windSpeedDisplay.innerHTML = Math.round(response.data.wind.speed);
-  currentConditionsDisplay.innerHTML = response.data.weather[0].description;
+  cityElement.innerHTML = response.data.name;
+  countryElement.innerHTML = response.data.sys.country;
+  currentTempElement.innerHTML = Math.round(response.data.main.temp);
+  feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
+  humidityElement.innerHTML = response.data.main.humidity;
+  windSpeedElement.innerHTML = Math.round(response.data.wind.speed);
+  currentConditionsElement.innerHTML = response.data.weather[0].description;
   mainWeatherIcon.setAttribute(
     "src",
     ` http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   mainWeatherIcon.setAttribute("alt", response.data.weather[0].description);
+  displayForecast();
 }
 
-function requestApiDatabyCity(cityName) {
+function getApiDataByCity(cityName) {
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=${units}`;
@@ -79,25 +76,23 @@ function requestApiDatabyCity(cityName) {
 }
 
 //works for 2 letter US state or spelled out country
-function requestApiDataByCityStateCountry(cityName, stateAbbrOrCountry) {
+function getApiDataByCityStateCountry(cityName, stateAbbrOrCountry) {
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${stateAbbrOrCountry},US&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showApiData);
 }
 
-
 function requestApiData(event) {
   event.preventDefault();
-  let citySearch = document.querySelector("#city-search");
-  let cityName = `${citySearch.value}`;
+  let citySearchElement = document.querySelector("#city-search");
+  let cityName = `${citySearchElement.value}`;
   if (cityName.includes(",")) {
     let cityArray = cityName.split(",");
-    requestApiDataByCityStateCountry(cityArray[0], cityArray[1]);
+    getApiDataByCityStateCountry(cityArray[0], cityArray[1]);
   } else {
-     requestApiDatabyCity(cityName);
+     getApiDataByCity(cityName);
   }
- 
 }
 
 function getCoordsForApi(position) {
@@ -113,11 +108,6 @@ function getLocation() {
   navigator.geolocation.getCurrentPosition(getCoordsForApi);
 }
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", requestApiData);
-
-let currentLocationButton = document.querySelector("#get-location-button");
-currentLocationButton.addEventListener("click", getLocation);
 
 function celsiusToFahrenheit(celsiusTemp) {
   let fahrenheitTemp = celsiusTemp * (9 / 5) + 32;
@@ -149,8 +139,46 @@ function displayC() {
   }
 }
 
+
+function displayForecast() {
+let forecastElement = document.querySelector("#five-day-forecast");
+let forecastDays = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+let forecastHTML = `<div class="row">`;
+forecastDays.forEach(function(day) {
+  forecastHTML = forecastHTML + 
+              `<div class="col">
+                    <h5 class="forecast-title-day">
+                      ${day}
+                    </h5>
+                    <img src="http://openweathermap.org/img/wn/02d@2x.png" alt="" class="forecast-day-icon" />
+                    <div class="forecast-temps-day">
+                      <div class="hi-temp-day">
+                        90°
+                      </div>
+                      <div class="low-temp-day">
+                        65°
+                      </div>
+                    </div>
+                </div>`;
+});
+forecastHTML = forecastHTML + `</div>`;
+forecastElement.innerHTML = forecastHTML;
+}
+
+
+let defaultCity = "Los Angeles";
+getApiDataByCity(defaultCity);
+
+
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", requestApiData);
+
+let currentLocationButton = document.querySelector("#get-location-button");
+currentLocationButton.addEventListener("click", getLocation);
+
 let buttonF = document.querySelector("#unit-f");
 let buttonC = document.querySelector("#unit-c");
 
 buttonF.addEventListener("click", displayF);
 buttonC.addEventListener("click", displayC);
+
