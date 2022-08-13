@@ -1,9 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
 
+body {
+  background-image: url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/043/516/original/weather-app-background.jpg?1660416244');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 90%;
+}
+
 button .celsius {
 display: inline;
   
 }
+
+.top-card {
+  padding-left: 10px;
+}
+
+
 
 .city {
   margin-top: 10px;
@@ -62,7 +75,6 @@ display: inline;
 }
 
 
-
 div.col {
   padding: 5px;
 }
@@ -92,12 +104,6 @@ button .fahrenheit {
   font-family: 'PT Mono', monospace;
 
 }
-
-.forecast-title {
-  color: rgba(62, 62, 62, 0.648);
-  font-size: 18px;
-}
-
 
 
 .hi-low-main {
@@ -131,13 +137,14 @@ button .fahrenheit {
 .main-card {
   max-width: 600px;
   display: block;
-  margin: 20px auto;
+  margin: 30px auto;
+box-shadow: 5px 5px 9px 6px rgba(29, 134, 222, 0.2);
 }
 
 .main-icon {
   height: 60px;
   position: absolute;
-left: -5px;
+left: 5px;
 top: 210px;
  
 }
@@ -162,21 +169,11 @@ left: 40px;
   left: 30px;
 }
 
-.search input {
-  height: 40px;
-  
-}
-
 .search input:focus {
   box-shadow: none;
   border: 2px solid blue;
 }
 
-.small-card .emoji {
-  margin: 0;
-  text-align: center;
-  font-size: 20px;
-}
 
 .unit-fahrenheit {
   
@@ -208,6 +205,7 @@ left: 40px;
   font-size: 20px;
   color: rgba(62, 62, 62, 0.8);
   margin-bottom: 20px;
+  text-indent: 15px;
 }
 
 .forecast-title-day {
@@ -222,9 +220,6 @@ left: 40px;
  
 }
 
-.vl {
-  border-right: 1px solid #dee2de;
 
-}
 
 

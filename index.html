@@ -13,13 +13,16 @@
   <link rel="stylesheet" href="src/style.css" type="text/css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+<div class="container">
 
-<body>
+  <body>
 
-  <div class="container">
-    <div class="card main-card">
+
+
+    <div class="card main-card ">
+
       <div class="card-body">
-
+<div class="top-card">
         <form id="search-form">
           <div class="row">
             <div class="col-8 ">
@@ -48,7 +51,8 @@
             </div>
             <div>
               <div class="hi-low-main text-muted"><span class="hi-temp-main">↑<span class="convert" id="hi-temp-today">
-                </span>°</span>&ensp;<span class="lo-temp-main">↓ <span class="convert" id="lo-temp-today"> </span>°</span>
+                  </span>°</span>&ensp;<span class="lo-temp-main">↓ <span class="convert" id="lo-temp-today">
+                  </span>°</span>
               </div>
               <span class="current-temp convert" id="todays-temp"></span><span class="main-degree-symbol">°</span>
 
@@ -63,12 +67,15 @@
 
 
             <ul class="details">
-              <li class="feels-like-element text-muted details-1">Feels like <span class="convert" id="feels-like"></span>°
+              <li class="feels-like-element text-muted details-1">Feels like <span class="convert"
+                  id="feels-like"></span>°
               </li>
               <li class="details-2 text-muted">Humidity: <span id="humidity"></span>%</li>
-              <li class="details-3 text-muted">Wind: <span id="wind-speed"> </span><span id="wind-label"> mph</span> </li>
+              <li class="details-3 text-muted">Wind: <span id="wind-speed"> </span><span id="wind-label"> mph</span>
+              </li>
             </ul>
           </div>
+        </div>
         </div>
         <hr />
         <h4 class="forecast-title-main"><em>
@@ -78,16 +85,16 @@
         <div class="weather-forecast-day text-muted" id="five-day-forecast"></div>
       </div>
     </div>
-  </div>
 
-  <div class="footer">
-    An
-    <a href="https://github.com/kendracodesio/weather-app.git">open source project</a>
-    by Kendra Reynolds
-  </div>
-  </div>
+    <div class="footer">
+      An
+      <a href="https://github.com/kendracodesio/weather-app.git">open source project</a>
+      by Kendra Reynolds
+    </div>
+    <script src="src/script.js"></script>
+  </body>
 
-  <script src="src/script.js"></script>
-</body>
+
+</div>
 
 </html>

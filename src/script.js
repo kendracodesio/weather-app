@@ -97,7 +97,18 @@ function getLocation() {
   navigator.geolocation.getCurrentPosition(getCurrentLocationCoordsForApi);
 }
 
+function resetButtons() {
+   let buttonF = document.querySelector("#unit-f");
+   buttonF.innerHTML = `<strong>F</strong>`;
+   let buttonC = document.querySelector("#unit-c");
+   buttonC.innerHTML = "C";
+   let windLabelElement = document.querySelector("#wind-label");
+   windLabelElement.innerHTML = " mph";
+
+}
+
 function displayForecast(response) {
+resetButtons();
   let forecast = response.data.daily;
   let todaysHighElement = document.querySelector("#hi-temp-today");
   let todayLowElement = document.querySelector("#lo-temp-today");
@@ -146,7 +157,6 @@ function displayForecast(response) {
 
 
 function showApiData(response) {
- console.log(response.data);
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiKey = "1e443f6da9b633764beaeb76bb472402";
