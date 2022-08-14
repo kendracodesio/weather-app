@@ -180,7 +180,7 @@ function showApiData(response) {
   currentTempElement.innerHTML = Math.round(response.data.main.temp);
   feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
   humidityElement.innerHTML = response.data.main.humidity;
-  windSpeedElement.innerHTML = response.data.wind.speed.toFixed(2);
+  windSpeedElement.innerHTML = response.data.wind.speed.toFixed(1);
   currentConditionsElement.innerHTML = response.data.weather[0].description;
   mainWeatherIcon.setAttribute(
     "src",
@@ -218,7 +218,7 @@ function displayImperialUnits() {
     let windSpeedElement = document.querySelector("#wind-speed");
     windSpeedElement.innerHTML =
       metersPerSecToMilesPerHr(windSpeedElement.innerHTML)
-    .toFixed(2);
+    .toFixed(1);
     let windLabelElement = document.querySelector("#wind-label");
     windLabelElement.innerHTML = " mph";
  
@@ -235,7 +235,7 @@ function displayMetricUnits() {
     });
     let windSpeedElement = document.querySelector("#wind-speed");
     windSpeedElement.innerHTML = 
-      milesPerHrToMetersPerSec(windSpeedElement.innerHTML).toFixed(2);
+      milesPerHrToMetersPerSec(windSpeedElement.innerHTML).toFixed(1);
     let windLabelElement = document.querySelector("#wind-label");
     windLabelElement.innerHTML = " m/s";
     buttonC.innerHTML = `<strong>C</strong>`;
