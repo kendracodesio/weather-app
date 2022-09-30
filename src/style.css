@@ -44,23 +44,29 @@ display: inline;
   font-weight: 300;
 }
 
-.current-location-button {
-  /* display: inline; */
+.search-area {
+  padding: 3px;
+}
+
+a .get-current-location {
+  color: black;
+  text-decoration: none;
+}
+
+.get-current-location {
+  padding: 9px 8px;
+  background: #ced4da;
   font-size: 20px;
   border-radius: 5px;
   border: 1px solid #ced4da;
-  background: #e5ebf0;
-  /* position: absolute; */
-  height: 40px;
-  width: 35px;
   transition: all 200ms ease-in-out;
 
 }
 
-.current-location-button:hover {
- border: 3px solid #ced4da;
- background: #d7dde3;
- 
+.get-current-location:hover {
+ border: 1px solid #ced4da;
+ background: #abadb6;
+
 }
 
 .date {
