@@ -22,60 +22,61 @@
     <div class="card main-card ">
 
       <div class="card-body">
-<div class="top-card">
-        <form id="search-form">
-          <div class="row">
-            <div class="col-8 ">
-
-              <button type="button" class="current-location-button" id="get-location-button"><i
-                  class="fa-solid fa-location-dot"></i></button>
-
-              <input type="search" class="form-control search" placeholder="enter city" id="city-search" />
-            </div>
-            <div class="col-2">
-              <input type="submit" class="btn btn-primary search-btn" value="Search" />
-            </div>
-          </div>
-        </form>
-
-        <h1 class="card-title city" id="city-display">
-        </h1>
-        <h6 class="card-subtitle mb-2 text-muted country" id="country-display"></h6>
-        <h6 class="card-subtitle mb-2 text-muted date" id="local-date-time"></h6>
-        <div class="row">
-          <div class="col">
-
-            <div class="conditions"> <img src="" alt="" id="main-weather-icon" class="main-icon" />
-              <span class="card-subtitle mb-2 text-muted current-conditions" id="current-conditions">
-              </span>
-            </div>
-            <div>
-              <div class="hi-low-main text-muted"><span class="hi-temp-main">↑<span class="convert" id="hi-temp-today">
-                  </span>°</span>&ensp;<span class="lo-temp-main">↓ <span class="convert" id="lo-temp-today">
-                  </span>°</span>
+        <div class="top-card">
+          <form id="search-form">
+            <div class="search-area d-flex justify-content-start">
+              <div class>
+                <button type="button" class="current-location-button" id="get-location-button" title="Get Current Location"><i
+                    class="fa-solid fa-location-dot text-center"></i></button>
               </div>
-              <span class="current-temp convert" id="todays-temp"></span><span class="main-degree-symbol">°</span>
+              <div class="ms-1">
+                <input type="search" class="search" placeholder=" enter a city" id="city-search" autocomplete="off" />
+              </div>
+              <div class="ms-1">
+                <input type="submit" class="btn btn-primary search-btn" value="Search" />
+              </div>
+            </div>
+          </form>
 
-              <button class="unit-fahrenheit" id="unit-f"><strong>F</strong></button>
+          <h1 class="card-title city" id="city-display">
+          </h1>
+          <h6 class="card-subtitle mb-2 text-muted country" id="country-display"></h6>
+          <h6 class="card-subtitle mb-2 text-muted date" id="local-date-time"></h6>
+          <div class="row">
+            <div class="col">
 
-              <button class="unit-celsius" id="unit-c">C</button>
+              <div class="conditions"> <img src="" alt="" id="main-weather-icon" class="main-icon" />
+                <span class="card-subtitle mb-2 text-muted current-conditions" id="current-conditions">
+                </span>
+              </div>
+              <div>
+                <div class="hi-low-main text-muted"><span class="hi-temp-main">↑<span class="convert"
+                      id="hi-temp-today">
+                    </span>°</span>&ensp;<span class="lo-temp-main">↓ <span class="convert" id="lo-temp-today">
+                    </span>°</span>
+                </div>
+                <span class="current-temp convert" id="todays-temp"></span><span class="main-degree-symbol">°</span>
+
+                <button class="unit-fahrenheit" id="unit-f"><strong>F</strong></button>
+
+                <button class="unit-celsius" id="unit-c">C</button>
 
 
+              </div>
+            </div>
+            <div class="col">
+
+
+              <ul class="details">
+                <li class="feels-like-element text-muted details-1">Feels like <span class="convert"
+                    id="feels-like"></span>°
+                </li>
+                <li class="details-2 text-muted">Humidity: <span id="humidity"></span>%</li>
+                <li class="details-3 text-muted">Wind: <span id="wind-speed"> </span><span id="wind-label"> mph</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="col">
-
-
-            <ul class="details">
-              <li class="feels-like-element text-muted details-1">Feels like <span class="convert"
-                  id="feels-like"></span>°
-              </li>
-              <li class="details-2 text-muted">Humidity: <span id="humidity"></span>%</li>
-              <li class="details-3 text-muted">Wind: <span id="wind-speed"> </span><span id="wind-label"> mph</span>
-              </li>
-            </ul>
-          </div>
-        </div>
         </div>
         <hr />
         <h4 class="forecast-title-main"><em>

@@ -45,21 +45,22 @@ display: inline;
 }
 
 .current-location-button {
-  display: inline;
+  /* display: inline; */
   font-size: 20px;
   border-radius: 5px;
   border: 1px solid #ced4da;
   background: #e5ebf0;
-  position: absolute;
+  /* position: absolute; */
   height: 40px;
   width: 35px;
+  transition: all 200ms ease-in-out;
 
 }
 
 .current-location-button:hover {
  border: 3px solid #ced4da;
  background: #d7dde3;
- transition: all 200ms ease-in-out;
+ 
 }
 
 .date {
@@ -157,19 +158,19 @@ button .fahrenheit {
 
 .search {
 height: 40px;
-position: relative;
-left: 40px;
+width: 12em;
+border-radius: 5px;
+
 }
 
 .search-btn {
   height: 40px;
-  position: relative;
-  left: 30px;
+
 }
 
 .search input:focus {
-  box-shadow: none;
-  border: 2px solid blue;
+ 
+  border: .5px solid blue;
 }
 
 
