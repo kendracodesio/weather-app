@@ -3,7 +3,9 @@
 body {
   background-image: url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/043/516/original/weather-app-background.jpg?1660416244');
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: unset;
+  padding-top: 50px;
+  padding-bottom: 200px;
 
 }
 
